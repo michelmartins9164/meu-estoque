@@ -7,8 +7,8 @@ import { Provider } from '@chakra-ui/react/provider'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-      <Provider theme={baseTheme}>
-        <AppRoutes />
-      </Provider>
-  </StrictMode>,
+    <Provider theme={baseTheme}>
+      <AppRoutes />
+    </Provider>
+  </StrictMode>
 )
