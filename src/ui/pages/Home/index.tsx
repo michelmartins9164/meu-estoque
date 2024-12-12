@@ -1,4 +1,5 @@
 import {
+  Button,
   Flex,
   Image,
   Input,
@@ -7,10 +8,20 @@ import {
 } from '@chakra-ui/react'
 import Card from '../../../components/Card'
 import search from '../../../assets/search.svg'
+import { useEffect } from 'react'
+import { useAllOutfitsQuery } from '../../../services/queries/useAllOutfitsQuery'
+import { useNavigate } from 'react-router-dom'
+
 export default function Home() {
+  const teste = useAllOutfitsQuery().data
+  useEffect(() => {
+    console.log(teste)
+  }, [teste])
+
+  const navigate = useNavigate()
   return (
     <Flex
-      bg={'#151316'}
+      bg={'#131313'}
       h={'100vh'}
       w={'100%'}
       overflow={'clip'}
@@ -21,6 +32,7 @@ export default function Home() {
           <InputLeftElement>
             <Image src={search} w={6} h={6} />
           </InputLeftElement>
+
           <Input
             w={'70%'}
             type="text"
@@ -34,6 +46,7 @@ export default function Home() {
             }}
           />
         </InputGroup>
+        <Button onClick={() => navigate('/cadastrar')}>Cadastrar</Button>
       </Flex>
       <Flex
         overflow={'auto'}
@@ -44,12 +57,17 @@ export default function Home() {
         flexWrap={'wrap'}
         rowGap={3}
       >
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {teste?.map((item: any) => (
+          <Card
+            id={item.id}
+            belt={item.belt}
+            classType={item.classType}
+            key={item.id}
+            name={item.name}
+            age={item.age}
+            avatar={`${item.avatar}`}
+          />
+        ))}
       </Flex>
     </Flex>
   )

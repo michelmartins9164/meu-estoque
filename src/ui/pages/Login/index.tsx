@@ -28,7 +28,9 @@ export default function Login() {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<FormData>()
+  } = useForm<FormData>({
+    mode: 'onChange'
+  })
   async function SingIn({
     email,
     password
@@ -52,18 +54,6 @@ export default function Login() {
   }
   return (
     <Flex w="100%" h="100vh" bg="#151316" position="relative" align="end">
-      <Box
-        as="span"
-        w="380px"
-        h="380px"
-        position="absolute"
-        borderRadius="50%"
-        bgGradient="linear(to-r, #B379DF, #360060)"
-        transform="translateX(-50%)"
-        left="50%"
-        top="-390px"
-        filter="blur(140px)"
-      />
       <Flex
         opacity="100%"
         h="80%"
@@ -145,7 +135,8 @@ export default function Login() {
             </Flex>
             <Flex mt={10} w="100%" justifyContent="center">
               <Button
-                bgGradient="linear(to-r, #9C3FE4, #C65647)"
+                border={'1px solid'}
+                borderColor={'#ffffff'}
                 w="100%"
                 h="50px"
                 borderRadius="15px"
@@ -155,7 +146,7 @@ export default function Login() {
                   filter: 'brightness(0.9)'
                 }}
               >
-                <Text color="#fff">Entrar</Text>
+                <Text color="#000">Entrar</Text>
               </Button>
             </Flex>
           </form>
