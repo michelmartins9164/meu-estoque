@@ -1,4 +1,4 @@
-import { Flex, Image, Text, Link, Box, Button } from '@chakra-ui/react'
+import { Flex, Image, Text, Box, Button } from '@chakra-ui/react'
 import { doc, deleteDoc } from 'firebase/firestore'
 import { db } from '../../api/firebase'
 import { useNavigate } from 'react-router-dom'
