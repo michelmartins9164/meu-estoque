@@ -11,6 +11,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { addDoc, collection } from 'firebase/firestore'
 import { db } from '../../../api/firebase'
+import moment from 'moment'
 
 export default function Register() {
   const [name, setName] = useState('')
@@ -24,6 +25,7 @@ export default function Register() {
   const [photo, setPhoto] = useState<File | null>(null)
   const [photoBase64, setPhotoBase64] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
+  const [startDate, setStartDate] = useState('')
   const navigate = useNavigate()
 
   // Converte a imagem para Base64
@@ -50,7 +52,15 @@ export default function Register() {
       birthDate,
       responsibleName
     })
-    if (!name || !age || !gender || !belt || !birthDate || !responsibleName) {
+    if (
+      !name ||
+      !age ||
+      !gender ||
+      !belt ||
+      !birthDate ||
+      !responsibleName ||
+      !startDate
+    ) {
       alert('Por favor, preencha todos os campos obrigatórios!')
       return
     }
@@ -64,6 +74,7 @@ export default function Register() {
         age: parseInt(age, 10),
         gender,
         belt: belt,
+        startDate: moment().format('YYYY-MM-DD'),
         birthDate,
         responsible: {
           name: responsibleName,
@@ -169,6 +180,17 @@ export default function Register() {
               type="date"
               value={birthDate}
               onChange={(e) => setBirthDate(e.target.value)}
+              color="#000"
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel color="#000">Data de Inicio</FormLabel>
+            <Input
+              border={'1px solid #000'}
+              bg={'#fff'}
+              type="date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
               color="#000"
             />
           </FormControl>

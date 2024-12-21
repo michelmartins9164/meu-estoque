@@ -58,25 +58,34 @@ export default function Card({
 
   const navigate = useNavigate()
   return (
-    <Flex
-      onClick={() => navigate(`/user/${id}`)}
-      direction={'column'}
-      bg={'#1A1A1A'}
-      h={'440px'}
-      w={'300px'}
-      borderRadius={'12px'}
-      boxShadow={'lg'}
-      overflow={'hidden'}
-    >
-      <Image
-        src={avatar}
-        alt={name}
-        w={'100%'}
-        h={'240px'}
-        objectFit={'cover'}
-        borderRadius={'12px 12px 0 0'}
-      />
-
+    <Flex flexDir={'column'} h={'500px'}>
+      <Flex
+        onClick={() => navigate(`/user/${id}`)}
+        direction={'column'}
+        bg={'#1A1A1A'}
+        h={'440px'}
+        w={'300px'}
+        borderRadius={'12px'}
+        boxShadow={'lg'}
+        overflow={'hidden'}
+      >
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          width="100%"
+          height="100%"
+        >
+          <Image
+            src={avatar}
+            alt={name}
+            w="100%"
+            h="100%"
+            objectFit="contain"
+            borderRadius="12px 12px 0 0"
+          />
+        </Box>
+      </Flex>
       <Flex
         direction={'column'}
         p={4}
@@ -105,9 +114,10 @@ export default function Card({
             <Box w={'10px'} h={'20px'} bg={colorBelt(belt)}></Box>
           </Flex>
         </Text>
-        <Text color={'#A4A4A4'} fontWeight={'400'} mt={2}>
+        {/* TODO: Adicionar turma se necessarioo */}
+        {/*         <Text color={'#A4A4A4'} fontWeight={'400'} mt={2}>
           Turma: {classType}
-        </Text>
+          </Text> */}
 
         {/* Redes sociais */}
         <Flex mt={3} justifyContent={'flex-start'}></Flex>
