@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Register from '../ui/pages/Register'
 import User from '../ui/pages/User'
 
-const Login = lazy(() => import('../ui/pages/Login'))
+//const Login = lazy(() => import('../ui/pages/Login'))
 const NotFound = lazy(() => import('../ui/pages/NotFound'))
 const Home = lazy(() => import('../ui/pages/Home'))
 export default function AppRoutes() {

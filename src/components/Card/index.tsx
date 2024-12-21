@@ -15,9 +15,10 @@ export default function Card({
   name: string
   age: number
   avatar: string
-  classType: string
+  classType?: string
   belt: string
 }) {
+  classType
   function colorBelt(belt: string) {
     switch (belt) {
       case 'Branca':
