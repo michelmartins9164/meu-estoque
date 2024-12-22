@@ -85,7 +85,7 @@ export default function Register() {
       })
 
       alert('Usuário cadastrado com sucesso!')
-      navigate('/home')
+      navigate('/')
     } catch (error) {
       console.error('Erro ao salvar os dados:', error)
       alert('Erro ao salvar os dados. Tente novamente.')

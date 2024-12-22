@@ -15,7 +15,7 @@ export default function AppRoutes() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="*" element={<NotFound />} />
-            <Route path="/home" element={<Home />} />
+
             <Route path="/cadastrar" element={<Register />} />
             <Route path="/user/:id" element={<User />} />
           </Routes>

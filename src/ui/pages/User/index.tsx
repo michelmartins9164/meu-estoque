@@ -29,7 +29,10 @@ export default function User() {
   const [responsibleName, setResponsibleName] = useState('')
   const [responsibleContact, setResponsibleContact] = useState('')
   const [responsibleAddress, setResponsibleAddress] = useState('')
+  const [photo, setPhoto] = useState<File | null>(null)
   const [userData, setUserData] = useState<any>()
+  const [photoBase64, setPhotoBase64] = useState<string | null>(null)
+
   useEffect(() => {
     const fetchUserData = async () => {
       if (!id) return
@@ -51,6 +54,7 @@ export default function User() {
           setResponsibleName(data.responsible?.name || '')
           setResponsibleContact(data.responsible?.contact || '')
           setResponsibleAddress(data.responsible?.address || '')
+          setPhoto(data.avatar || '')
         } else {
           console.log('Documento não encontrado')
         }
@@ -72,6 +76,7 @@ export default function User() {
       await updateDoc(userRef, {
         name,
         age,
+        avatar: photoBase64,
         gender,
         belt,
         startDate,
@@ -87,6 +92,20 @@ export default function User() {
       console.error('Erro ao salvar dados do usuário:', error)
     }
   }
+
+  useEffect(() => {
+    if (photo && photo instanceof File) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        if (reader.result) {
+          setPhotoBase64(reader.result as string)
+        }
+      }
+      reader.readAsDataURL(photo)
+    } else {
+      setPhotoBase64(photo && (photo as string))
+    }
+  }, [photo])
 
   if (loading) {
     return <Text>Carregando...</Text>
@@ -131,6 +150,13 @@ export default function User() {
         borderRadius="full"
         boxSize="150px"
       />
+      <Input
+        border={'1px solid #000'}
+        bg={'#fff'}
+        type="file"
+        onChange={(e) => setPhoto(e.target.files?.[0] || null)}
+        color="#000"
+      />
       <Box as="form" w="100%" p={4} overflow={'auto'}>
         <FormControl mb={2}>
           <FormLabel>Nome</FormLabel>
@@ -166,11 +192,17 @@ export default function User() {
         </FormControl>
         <FormControl mb={2}>
           <FormLabel>Entrou em</FormLabel>
-          <Input value={moment(startDate).format('DD/MM/YYYY')} isReadOnly />
+          <Input
+            value={moment(startDate).format('DD/MM/YYYY')}
+            isReadOnly={!isEditing}
+          />
         </FormControl>
         <FormControl mb={2}>
           <FormLabel>Data de Nascimento</FormLabel>
-          <Input value={moment(birthDate).format('DD/MM/YYYY')} isReadOnly />
+          <Input
+            value={moment(birthDate).format('DD/MM/YYYY')}
+            isReadOnly={!isEditing}
+          />
         </FormControl>
         <Box mt={4}>
           <Text fontSize="lg" fontWeight="bold" mb={4}>
